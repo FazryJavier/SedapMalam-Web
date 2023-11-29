@@ -16,3 +16,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('Admin.Pages.dashboard');
 });
+
+Route::get('/Data-Anak', function () {
+    return view('Admin.Pages.DataAnak.index');
+});
+
+Route::get('/Data-Orangtua', function () {
+    return view('Admin.Pages.DataOrangtua.index');
+});
+
+Route::get('/Data-Kader', function () {
+    return view('Admin.Pages.DataKader.index');
+});
+
+Route::get('/Timbang-Anak', function () {
+    return view('Admin.Pages.TimbangAnak.index');
+});
+
+Route::get('/Grafik-Perkembangan', function () {
+    return view('Admin.Pages.GrafikPerkembangan.index');
+});
