@@ -35,6 +35,7 @@
                 <th class="col-sm-2">Nama Ibu</th>
                 <th class="col-sm-3">Alamat</th>
                 <th class="col-sm-2">Nomor Telpon</th>
+                <th class="col-sm-2">NIK Anak</th>
                 <th class="col-sm-2">Action</th>
             </tr>
         </thead>

@@ -31,47 +31,41 @@
         <thead>
             <tr>
                 <th class="col-sm-1">No</th>
-                <th class="col-sm-2">NIK Anak</th>
-                <th class="col-sm-3">Nama Anak</th>
-                <th class="col-sm-2">Nama Orangtua</th>
+                <th class="col-sm-2">NIK</th>
+                <th class="col-sm-2">Nama</th>
+                <th class="col-sm-2">Nama Ibu</th>
                 <th class="col-sm-1">Berat Badan</th>
                 <th class="col-sm-1">Tinggi Badan</th>
+                <th class="col-sm-1">Berat Ideal</th>
                 <th class="col-sm-2">Action</th>
             </tr>
         </thead>
         <tbody>
-            {{-- @forelse ($product as $product => $item) --}}
+            @forelse ($data_anak as $data_anak => $item)
                 <tr>
-                    {{-- <td>{{ $product + 1 }}</td>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->title }}</td>
-                    <td>{{ $item->subTitle }}</td>
-                    <td>{{ $item->description }}</td>
-                    <td><img src="{{ asset('storage/' . $item->image) }}" alt="Image" class="img-fluid mt-3"></td>
+                    <td>{{ $data_anak + 1 }}</td>
+                    <td>{{ $item->nik_anak }}</td>
+                    <td>{{ $item->nama_anak }}</td>
+                    <td>{{ $item->nama_ibu }}</td>
+                    <td>{{ $item->berat_badan }}</td>
+                    <td>{{ $item->tinggi_badan }}</td>
+                    <td>{{ $item->bmi }}</td>
                     <td>
-                        <form action="/Product/{{ $item->id }}" method="POST">
-                            @if (Auth::user()->level == 'Admin')
-                                <a href="/Product/{{ $item->id }}/update" type="button" class="btn btn-warning"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                            @endif
-                            @if (Auth::user()->level == 'Editor')
-                                <a href="/Product/{{ $item->id }}/update" type="button" class="btn btn-warning"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                            @endif
+                        <form action="/Data-Anak/{{ $item->id }}" method="POST">
+                            <a href="/Data-Anak/{{ $item->id }}/update" type="button" class="btn btn-warning"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
                             @csrf
                             @method('delete')
-                            @if (Auth::user()->level == 'Admin')
-                                <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Are you sure want to delete this data?')">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            @endif
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure want to delete this data?')">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </form>
-                    </td> --}}
+                    </td>
                 </tr>
-            {{-- @empty
+            @empty
                 <h1>Data is Empty</h1>
-            @endforelse --}}
+            @endforelse
         </tbody>
     </table>
 @endsection
