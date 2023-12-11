@@ -36,3 +36,7 @@ Route::get('/Timbang-Anak', function () {
 Route::get('/Grafik-Perkembangan', function () {
     return view('Admin.Pages.GrafikPerkembangan.index');
 });
+
+Route::get('/Home', function () {
+    return view('User.home');
+});
