@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('User.home');
+});
+Route::get('/dasboard', function () {
     return view('Admin.Pages.dashboard');
 });
 
@@ -35,8 +38,4 @@ Route::get('/Timbang-Anak', function () {
 
 Route::get('/Grafik-Perkembangan', function () {
     return view('Admin.Pages.GrafikPerkembangan.index');
-});
-
-Route::get('/Home', function () {
-    return view('User.home');
 });

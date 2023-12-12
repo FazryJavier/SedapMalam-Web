@@ -75,8 +75,8 @@
                         </ul>
                     </li> --}}
                     {{-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> --}}
-                    <li><a href="#about"><img src="assets1\ic_baseline-log-in.svg" alt="" height="50%"
-                                width="50%"></a>
+                    <li><a class="nav-link scrollto" href="#about"><img src="assets1\ic_baseline-log-in.svg"
+                                alt="" height="50%" width="50%"></a>
                     </li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -92,16 +92,16 @@
             <div class="row">
                 <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
-                    <h1>Better Solutions For Your Business</h1>
+                    <h1>Posyandu Sedap Malam</h1>
                     <h2>We are team of talented designers making websites with Bootstrap</h2>
-                    <div class="d-flex justify-content-center justify-content-lg-start">
+                    {{-- <div class="d-flex justify-content-center justify-content-lg-start">
                         <a href="#about" class="btn-get-started scrollto">Get Started</a>
                         <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
                                 class="bi bi-play-circle"></i><span>Watch Video</span></a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+                    <img src="assets1\logo-posyandu.png" class="img-fluid animated" alt="">
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
     <main id="main">
 
         <!-- ======= Clients Section ======= -->
-        <section id="clients" class="clients section-bg">
+        {{-- <section id="clients" class="clients section-bg">
             <div class="container">
 
                 <div class="row" data-aos="zoom-in">
@@ -143,7 +143,7 @@
                 </div>
 
             </div>
-        </section><!-- End Cliens Section -->
+        </section><!-- End Cliens Section --> --}}
 
         <!-- ======= About Us Section ======= -->
         <section id="about" class="about">
@@ -208,8 +208,7 @@
                                         data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam
                                         at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
-                                    <div id="accordion-list-1" class="collapse show"
-                                        data-bs-parent=".accordion-list">
+                                    <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                                         <p>
                                             Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus
                                             laoreet non curabitur gravida. Venenatis lectus magna fringilla urna
@@ -864,7 +863,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer">
 
-        <div class="footer-newsletter">
+        {{-- <div class="footer-newsletter">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
@@ -876,8 +875,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div> --}}
+        {{-- 
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -929,7 +928,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="container footer-bottom clearfix">
             <div class="copyright">
