@@ -12,7 +12,9 @@ class DataAnakController extends Controller
      */
     public function index()
     {
-        //
+        $dataanak = DataAnak::all();
+
+        return view('Admin.Pages.DataAnak.index', compact('dataanak'));
     }
 
     /**

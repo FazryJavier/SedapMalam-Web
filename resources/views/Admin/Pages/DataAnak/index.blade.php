@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right mb-2">
-                <a class="btn btn-success" href="/Data-Anak/create"> Create </a>
+                <a class="btn btn-success" href="/data-anak/create"> Create </a>
             </div>
         </div>
     </div>
@@ -33,26 +33,26 @@
                 <th class="col-sm-1">No</th>
                 <th class="col-sm-2">NIK</th>
                 <th class="col-sm-2">Nama</th>
-                <th class="col-sm-2">Nama Ibu</th>
+                <th class="col-sm-2">Umur</th>
                 <th class="col-sm-1">Berat Badan</th>
                 <th class="col-sm-1">Tinggi Badan</th>
-                <th class="col-sm-1">Berat Ideal</th>
+                <th class="col-sm-1">BMI</th>
                 <th class="col-sm-2">Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($data_anak as $data_anak => $item)
+            @forelse ($dataanak as $key => $item)
                 <tr>
-                    <td>{{ $data_anak + 1 }}</td>
+                    <td>{{ $key + 1 }}</td>
                     <td>{{ $item->nik_anak }}</td>
                     <td>{{ $item->nama_anak }}</td>
-                    <td>{{ $item->nama_ibu }}</td>
+                    <td>{{ $item->umur }}</td>
                     <td>{{ $item->berat_badan }}</td>
                     <td>{{ $item->tinggi_badan }}</td>
                     <td>{{ $item->bmi }}</td>
                     <td>
-                        <form action="/Data-Anak/{{ $item->id }}" method="POST">
-                            <a href="/Data-Anak/{{ $item->id }}/update" type="button" class="btn btn-warning"><i
+                        <form action="/data-anak/{{ $item->id }}" method="POST">
+                            <a href="/data-anak/{{ $item->id }}/update" type="button" class="btn btn-warning"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                             @csrf
                             @method('delete')
@@ -64,7 +64,9 @@
                     </td>
                 </tr>
             @empty
-                <h1>Data is Empty</h1>
+                <tr>
+                    <td colspan="12" class="text-center">Data is Empty</td>
+                </tr>
             @endforelse
         </tbody>
     </table>

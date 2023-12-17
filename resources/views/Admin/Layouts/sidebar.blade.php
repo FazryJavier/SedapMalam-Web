@@ -35,29 +35,12 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="/" class="nav-link">
+                    <a href="/dashboard" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fa-solid fa-children"></i>
-                        <p>
-                            Data Anak
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/Data-Anak" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tabel Data Anak</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -69,9 +52,26 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/Data-Orangtua" class="nav-link">
+                            <a href="/data-orangtua" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Orangtua</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-children"></i>
+                        <p>
+                            Data Anak
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/data-anak" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel Data Anak</p>
                             </a>
                         </li>
                     </ul>
@@ -86,7 +86,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/Data-Kader" class="nav-link">
+                            <a href="/data-kader" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Kader</p>
                             </a>
@@ -103,7 +103,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/Timbang-Anak" class="nav-link">
+                            <a href="/timbang-anak" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Perhitungan BMI</p>
                             </a>
@@ -120,7 +120,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/Grafik-Perkembangan" class="nav-link">
+                            <a href="/grafik-perkembangan" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tampilan Grafik</p>
                             </a>

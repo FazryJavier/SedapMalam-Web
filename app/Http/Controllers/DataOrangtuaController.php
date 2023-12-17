@@ -12,7 +12,9 @@ class DataOrangtuaController extends Controller
      */
     public function index()
     {
-        //
+        $dataorangtua = DataOrangtua::all();
+
+        return view('Admin.Pages.DataOrangtua.index', compact('dataorangtua'));
     }
 
     /**
@@ -28,7 +30,16 @@ class DataOrangtuaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_ayah' => 'required',
+            'nama_ibu' => 'required',
+            'alamat' => 'required',
+            'no_telpon' => 'required',
+        ]);
+
+        DataOrangtua::create($validatedData);
+
+        return redirect('/data-orangtua')->with('success', 'Data Orangtua created successfully!');
     }
 
     /**
@@ -42,24 +53,39 @@ class DataOrangtuaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DataOrangtua $dataOrangtua)
+    public function edit($id)
     {
-        //
+        $dataOrangtua = DataOrangtua::findOrFail($id);
+
+        return view('Admin.Pages.DataOrangtua.edit', compact('dataOrangtua'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DataOrangtua $dataOrangtua)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_ayah' => 'required',
+            'nama_ibu' => 'required',
+            'alamat' => 'required',
+            'no_telpon' => 'required',
+        ]);
+
+        $dataOrangtua = DataOrangtua::findOrFail($id);
+        $dataOrangtua->update($validatedData);
+
+        return redirect('/data-orangtua')->with('success', 'Data Orangtua updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DataOrangtua $dataOrangtua)
+    public function destroy($id)
     {
-        //
+        $dataOrangtua = DataOrangtua::findOrFail($id);
+        $dataOrangtua->delete();
+
+        return redirect('/data-orangtua')->with('error', 'Data Orangtua deleted successfully!');
     }
 }
