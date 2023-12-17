@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('User.home');
 });
-Route::get('/dasboard', function () {
+Route::get('/dashboard', function () {
     return view('Admin.Pages.dashboard');
 });
 

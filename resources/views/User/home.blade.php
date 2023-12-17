@@ -36,7 +36,7 @@
   * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    ======================================================== -->
 </head>
 
 <body>
@@ -75,9 +75,7 @@
                         </ul>
                     </li> --}}
                     {{-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> --}}
-                    <li><a class="nav-link scrollto" href="#about"><img src="assets1\ic_baseline-log-in.svg"
-                                alt="" height="50%" width="50%"></a>
-                    </li>
+                    <li><a href="/dashboard">Login</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
