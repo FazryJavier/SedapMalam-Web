@@ -39,7 +39,7 @@ class DataOrangtuaController extends Controller
 
         DataOrangtua::create($validatedData);
 
-        return redirect('/data-orangtua')->with('success', 'Data Orangtua created successfully!');
+        return redirect('/data-orangtua')->with('success', 'Data Orang tua berhasil ditambahkan!');
     }
 
     /**
@@ -75,7 +75,7 @@ class DataOrangtuaController extends Controller
         $dataOrangtua = DataOrangtua::findOrFail($id);
         $dataOrangtua->update($validatedData);
 
-        return redirect('/data-orangtua')->with('success', 'Data Orangtua updated successfully!');
+        return redirect('/data-orangtua')->with('success', 'Data Orang tua berhasil diubah!');
     }
 
     /**
@@ -86,6 +86,6 @@ class DataOrangtuaController extends Controller
         $dataOrangtua = DataOrangtua::findOrFail($id);
         $dataOrangtua->delete();
 
-        return redirect('/data-orangtua')->with('error', 'Data Orangtua deleted successfully!');
+        return redirect('/data-orangtua')->with('success', 'Data Orang tua berhasil dihapus!');
     }
 }

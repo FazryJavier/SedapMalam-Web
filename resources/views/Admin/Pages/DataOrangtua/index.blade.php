@@ -1,7 +1,7 @@
 @extends('Admin.Layouts.master')
 
 @section('title')
-    Halaman Data Orangtua
+    Halaman Data Orang tua
 @endsection
 
 @push('script')
@@ -50,16 +50,19 @@
                     <td>{{ $item->alamat }}</td>
                     <td>{{ $item->no_telpon }}</td>
                     <td>
-                        <form action="/data-orangtua/{{ $item->id }}" method="POST">
-                            <a href="#" type="button" class="btn btn-warning" data-toggle="modal"
-                                data-target="#modal-edit-{{ $item->id }}"> <i class="fa-solid fa-pen-to-square"></i></a>
+                        <form id="delete-form-{{ $item->id }}" action="/data-orangtua/{{ $item->id }}"
+                            method="POST">
                             @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('Are you sure want to delete this data?')">
+                            @method('DELETE')
+                            <a href="#" type="button" class="btn btn-warning" data-toggle="modal"
+                                data-target="#modal-edit-{{ $item->id }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <button type="button" class="btn btn-danger delete-btn" data-id="{{ $item->id }}">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </form>
+
                     </td>
                 </tr>
             @empty
@@ -144,7 +147,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
-                                <textarea name="alamat" class="form-control" rows="2">{{ $item->alamat }}"</textarea>
+                                <textarea name="alamat" class="form-control" rows="2">{{ $item->alamat }}</textarea>
                                 <span class="text-danger" id="alamat_error_{{ $item->id }}"></span>
                             </div>
                             <div class="form-group mb-3">
@@ -166,6 +169,7 @@
     @endforeach
 
     <script>
+        // Tambah Data
         function validateForm() {
             var namaAyah = document.forms["quickForm"]["nama_ayah"].value;
             var namaIbu = document.forms["quickForm"]["nama_ibu"].value;
@@ -195,6 +199,7 @@
             }
         }
 
+        // Ubah Data
         function validateUpdateForm(itemId) {
             var namaAyah = document.forms["updateForm-" + itemId]["nama_ayah"].value;
             var namaIbu = document.forms["updateForm-" + itemId]["nama_ibu"].value;
@@ -223,5 +228,26 @@
                 $('#updateForm-' + itemId).submit();
             }
         }
+
+        // Hapus Data
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.delete-btn').on('click', function() {
+                var itemId = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Apakah anda yakin ingin menghapus data?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#delete-form-' + itemId).submit();
+                    }
+                });
+            });
+        });
     </script>
 @endsection

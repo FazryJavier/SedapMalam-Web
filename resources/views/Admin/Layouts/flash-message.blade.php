@@ -1,34 +1,57 @@
+{{-- SweetAlert2 CSS --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+{{-- jQuery --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{{-- SweetAlert2 --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/app.js"></script>
+
 @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{ $message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ $message }}',
+        });
+    </script>
 @endif
 
 @if ($message = Session::get('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{ $message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '{{ $message }}',
+        });
+    </script>
 @endif
 
 @if ($message = Session::get('warning'))
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>{{ $message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning!',
+            text: '{{ $message }}',
+        });
+    </script>
 @endif
 
 @if ($message = Session::get('info'))
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <strong>{{ $message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <script>
+        Swal.fire({
+            icon: 'info',
+            title: 'Info!',
+            text: '{{ $message }}',
+        });
+    </script>
 @endif
 
 @if ($errors->any())
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Please check the form below for errors</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Please check the form below for errors',
+            html: '{!! implode('<br>', $errors->all()) !!}',
+        });
+    </script>
 @endif
