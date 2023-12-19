@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataAnak;
+use App\Models\DataOrangtua;
 use Illuminate\Http\Request;
 
 class DataAnakController extends Controller
@@ -12,9 +13,10 @@ class DataAnakController extends Controller
      */
     public function index()
     {
-        $dataanak = DataAnak::all();
+        $dataanak = DataAnak::orderBy('created_at', 'asc')->get();
+        $dataorangtuas = DataOrangtua::all();
 
-        return view('Admin.Pages.DataAnak.index', compact('dataanak'));
+        return view('Admin.Pages.DataAnak.index', compact('dataanak', 'dataorangtuas'));
     }
 
     /**
@@ -30,7 +32,19 @@ class DataAnakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nik_anak' => 'required',
+            'nama_anak' => 'required',
+            'umur' => 'required',
+            'berat_badan' => 'nullable',
+            'tinggi_badan' => 'nullable',
+            'bmi' => 'nullable',
+            'IdOrangtua' => 'required',
+        ]);
+
+        DataAnak::create($validatedData);
+
+        return redirect('/data-anak')->with('success', 'Data Anak berhasil ditambahkan!');
     }
 
     /**
@@ -44,24 +58,44 @@ class DataAnakController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DataAnak $dataAnak)
+    public function edit($id)
     {
-        //
+        $dataanak = DataAnak::find($id);
+
+        $dataorangtuas = DataOrangtua::all();
+
+        return view('Admin.Pages.DataAnak.edit', compact('dataanak', 'dataorangtuas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DataAnak $dataAnak)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nik_anak' => 'required',
+            'nama_anak' => 'required',
+            'umur' => 'required',
+            'berat_badan' => 'nullable',
+            'tinggi_badan' => 'nullable',
+            'bmi' => 'nullable',
+            'IdOrangtua' => 'required',
+        ]);
+
+        $dataanak = DataAnak::findOrFail($id);
+        $dataanak->update($validatedData);
+
+        return redirect('/data-anak')->with('success', 'Data Anak berhasil diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DataAnak $dataAnak)
+    public function destroy($id)
     {
-        //
+        $dataanak = DataAnak::findOrFail($id);
+        $dataanak->delete();
+
+        return redirect('/data-anak')->with('success', 'Data Anak berhasil dihapus!');
     }
 }

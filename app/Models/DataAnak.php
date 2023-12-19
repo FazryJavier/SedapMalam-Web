@@ -12,4 +12,9 @@ class DataAnak extends Model
     protected $table='data_anaks';
     protected $primaryKey = 'nik_anak';
     protected $guarded=[];
+
+    public function dataorangtua()
+    {
+        return $this->belongsTo(DataOrangtua::class, 'IdOrangtua');
+    }
 }
