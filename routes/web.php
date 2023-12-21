@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/data-anak/{id}', [DataAnakController::class, 'update']);
     Route::delete('/data-anak/{id}', [DataAnakController::class, 'destroy']);
 
-    // Data Anak
+    // Data Kader
     Route::get('/data-kader', [UserController::class, 'index']);
     Route::post('/data-kader', [UserController::class, 'store']);
     Route::get('/data-kader/{id}/update', [UserController::class, 'edit']);
