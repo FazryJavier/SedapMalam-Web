@@ -12,9 +12,9 @@ class DataOrangtuaController extends Controller
      */
     public function index()
     {
-        $dataorangtua = DataOrangtua::all();
+        $dataOrangtua = DataOrangtua::all();
 
-        return view('Admin.Pages.DataOrangtua.index', compact('dataorangtua'));
+        return view('Admin.Pages.DataOrangtua.index', compact('dataOrangtua'));
     }
 
     /**

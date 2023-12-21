@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('umur');
             $table->integer('berat_badan')->nullable();
             $table->integer('tinggi_badan')->nullable();
+            $table->integer('lingkar_kepala')->nullable();
+            $table->integer('lingkar_lengan')->nullable();
             $table->integer('bmi')->nullable();
             $table->foreignId('IdOrangtua')->constrained('data_orangtuas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

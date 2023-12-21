@@ -42,7 +42,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($dataorangtua as $key => $item)
+            @forelse ($dataOrangtua as $key => $item)
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $item->nama_ayah }}</td>
@@ -62,7 +62,6 @@
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </form>
-
                     </td>
                 </tr>
             @empty
@@ -89,27 +88,26 @@
                         @method('POST')
                         <div class="mb-3">
                             <label for="nama_ayah" class="form-label">Nama Ayah</label>
-                            <input type="text" name="nama_ayah" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="nama_ayah_error"></span>
+                            <input type="text" name="nama_ayah" class="form-control" id="formGroupExampleInput" required>
+                            @error('nama_ayah')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="nama_ibu" class="form-label">Nama Ibu</label>
-                            <input type="text" name="nama_ibu" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="nama_ibu_error"></span>
+                            <input type="text" name="nama_ibu" class="form-control" id="formGroupExampleInput" required>
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat Rumah</label>
-                            <textarea name="alamat" class="form-control" rows="2"></textarea>
-                            <span class="text-danger" id="alamat_error"></span>
+                            <textarea name="alamat" class="form-control" rows="2" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="no_telpon" class="form-label">Nomor Telpon</label>
-                            <input type="text" name="no_telpon" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="no_telpon_error"></span>
+                            <input type="text" name="no_telpon" class="form-control" id="formGroupExampleInput" required>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success" onclick="validateForm()">Create</button>
+                            <button type="submit" class="btn btn-success">Create</button>
                         </div>
                     </form>
                 </div>
@@ -118,7 +116,7 @@
     </div>
 
     {{-- Ubah Data --}}
-    @foreach ($dataorangtua as $item)
+    @foreach ($dataOrangtua as $item)
         <div class="modal fade" id="modal-edit-{{ $item->id }}" data-backdrop="static">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -136,30 +134,25 @@
                             <div class="form-group mb-3">
                                 <label for="nama_ayah" class="form-label">Nama Ayah</label>
                                 <input type="text" name="nama_ayah" class="form-control"
-                                    value="{{ $item->nama_ayah }}">
-                                <span class="text-danger" id="nama_ayah_error_{{ $item->id }}"></span>
+                                    value="{{ $item->nama_ayah }}" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nama_ibu" class="form-label">Nama Ibu</label>
                                 <input type="text" name="nama_ibu" class="form-control"
-                                    value="{{ $item->nama_ibu }}">
-                                <span class="text-danger" id="nama_ibu_error_{{ $item->id }}"></span>
+                                    value="{{ $item->nama_ibu }}" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
-                                <textarea name="alamat" class="form-control" rows="2">{{ $item->alamat }}</textarea>
-                                <span class="text-danger" id="alamat_error_{{ $item->id }}"></span>
+                                <textarea name="alamat" class="form-control" rows="2" required>{{ $item->alamat }}</textarea>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="no_telpon" class="form-label">Nomor Telpon</label>
                                 <input type="text" name="no_telpon" class="form-control"
-                                    value="{{ $item->no_telpon }}">
-                                <span class="text-danger" id="no_telpon_error_{{ $item->id }}"></span>
+                                    value="{{ $item->no_telpon }}" required>
                             </div>
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success"
-                                    onclick="validateUpdateForm('{{ $item->id }}')">Update</button>
+                                <button type="submit" class="btn btn-success">Update</button>
                             </div>
                         </form>
                     </div>
@@ -169,73 +162,12 @@
     @endforeach
 
     <script>
-        // Tambah Data
-        function validateForm() {
-            var namaAyah = document.forms["quickForm"]["nama_ayah"].value;
-            var namaIbu = document.forms["quickForm"]["nama_ibu"].value;
-            var alamat = document.forms["quickForm"]["alamat"].value;
-            var noTelpon = document.forms["quickForm"]["no_telpon"].value;
-
-            document.getElementById('nama_ayah_error').innerHTML = "";
-            document.getElementById('nama_ibu_error').innerHTML = "";
-            document.getElementById('alamat_error').innerHTML = "";
-            document.getElementById('no_telpon_error').innerHTML = "";
-
-            if (namaAyah == "") {
-                document.getElementById('nama_ayah_error').innerHTML = "Nama Ayah harus diisi";
-            }
-            if (namaIbu == "") {
-                document.getElementById('nama_ibu_error').innerHTML = "Nama Ibu harus diisi";
-            }
-            if (alamat == "") {
-                document.getElementById('alamat_error').innerHTML = "Alamat harus diisi";
-            }
-            if (noTelpon == "") {
-                document.getElementById('no_telpon_error').innerHTML = "Nomor Telpon harus diisi";
-            }
-
-            if (namaAyah != "" && namaIbu != "" && alamat != "" && noTelpon != "") {
-                $('#quickForm').submit();
-            }
-        }
-
-        // Ubah Data
-        function validateUpdateForm(itemId) {
-            var namaAyah = document.forms["updateForm-" + itemId]["nama_ayah"].value;
-            var namaIbu = document.forms["updateForm-" + itemId]["nama_ibu"].value;
-            var alamat = document.forms["updateForm-" + itemId]["alamat"].value;
-            var noTelpon = document.forms["updateForm-" + itemId]["no_telpon"].value;
-
-            document.getElementById('nama_ayah_error_' + itemId).innerHTML = "";
-            document.getElementById('nama_ibu_error_' + itemId).innerHTML = "";
-            document.getElementById('alamat_error_' + itemId).innerHTML = "";
-            document.getElementById('no_telpon_error_' + itemId).innerHTML = "";
-
-            if (namaAyah == "") {
-                document.getElementById('nama_ayah_error_' + itemId).innerHTML = "Nama Ayah harus diisi";
-            }
-            if (namaIbu == "") {
-                document.getElementById('nama_ibu_error_' + itemId).innerHTML = "Nama Ibu harus diisi";
-            }
-            if (alamat == "") {
-                document.getElementById('alamat_error_' + itemId).innerHTML = "Alamat harus diisi";
-            }
-            if (noTelpon == "") {
-                document.getElementById('no_telpon_error_' + itemId).innerHTML = "Nomor Telpon harus diisi";
-            }
-
-            if (namaAyah != "" && namaIbu != "" && alamat != "" && noTelpon != "") {
-                $('#updateForm-' + itemId).submit();
-            }
-        }
-
         // Hapus Data
         document.addEventListener('DOMContentLoaded', function() {
             $('.delete-btn').on('click', function() {
                 var itemId = $(this).data('id');
-
                 Swal.fire({
-                    title: 'Apakah anda yakin ingin menghapus data?',
+                    title: 'Apakah anda yakin ingin menghapus data orang tua?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

@@ -36,15 +36,17 @@
                 <th class="col-sm-1">No</th>
                 <th class="col-sm-2">NIK</th>
                 <th class="col-sm-2">Nama</th>
-                <th class="col-sm-2">Umur</th>
+                <th class="col-sm-1">Umur</th>
                 <th class="col-sm-1">Berat Badan</th>
                 <th class="col-sm-1">Tinggi Badan</th>
+                <th class="col-sm-1">Ling. Kepala</th>
+                <th class="col-sm-1">Ling. Lengan</th>
                 <th class="col-sm-1">BMI</th>
-                <th class="col-sm-2">Action</th>
+                <th class="col-sm-1">Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($dataanak as $key => $item)
+            @forelse ($dataAnak as $key => $item)
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $item->nik_anak }}</td>
@@ -52,6 +54,8 @@
                     <td>{{ $item->umur }}</td>
                     <td>{{ $item->berat_badan }}</td>
                     <td>{{ $item->tinggi_badan }}</td>
+                    <td>{{ $item->lingkar_kepala }}</td>
+                    <td>{{ $item->lingkar_lengan }}</td>
                     <td>{{ $item->bmi }}</td>
                     <td>
                         <form id="delete-form-{{ $item->id }}" action="/data-anak/{{ $item->id }}" method="POST">
@@ -90,48 +94,50 @@
                         @csrf
                         @method('POST')
                         <div class="mb-3">
-                            <label for="nik_anak" class="form-label">NIK</label>
-                            <input type="text" name="nik_anak" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="nik_anak_error"></span>
+                            <label for="nik_anak" class="form-label">NIK Anak</label>
+                            <input type="text" name="nik_anak" class="form-control" id="formGroupExampleInput" required>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_anak" class="form-label">Nama</label>
-                            <input type="text" name="nama_anak" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="nama_anak_error"></span>
+                            <label for="nama_anak" class="form-label">Nama Anak</label>
+                            <input type="text" name="nama_anak" class="form-control" id="formGroupExampleInput" required>
                         </div>
                         <div class="mb-3">
                             <label for="umur" class="form-label">Umur</label>
-                            <input type="text" name="umur" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="umur_error"></span>
+                            <input type="text" name="umur" class="form-control" id="formGroupExampleInput" required>
                         </div>
                         <div class="mb-3">
                             <label for="berat_badan" class="form-label">Berat Badan</label>
                             <input type="text" name="berat_badan" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="berat_badan_error"></span>
                         </div>
                         <div class="mb-3">
                             <label for="tinggi_badan" class="form-label">Tinggi Badan</label>
                             <input type="text" name="tinggi_badan" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="tinggi_badan_error"></span>
                         </div>
                         <div class="mb-3">
-                            <label for="bmi" class="form-label">Hasil BMI</label>
+                            <label for="lingkar_kepala" class="form-label">Lingkar Kepala</label>
+                            <input type="text" name="lingkar_kepala" class="form-control" id="formGroupExampleInput">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lingkar_lengan" class="form-label">Lingkar Lengan</label>
+                            <input type="text" name="lingkar_lengan" class="form-control" id="formGroupExampleInput">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bmi" class="form-label">BMI</label>
                             <input type="text" name="bmi" class="form-control" id="formGroupExampleInput">
-                            <span class="text-danger" id="bmi_error"></span>
                         </div>
                         <div class="mb-3">
                             <label for="IdOrangtua" class="form-label">Nama Ibu</label>
-                            <select name="IdOrangtua" class="custom-select rounded-0" id="IdOrangtua">
-                                <option value="">Pilih Orang tua</option>
-                                @foreach ($dataorangtuas as $dataorangtua)
-                                    <option value="{{ $dataorangtua->id }}">{{ $dataorangtua->nama_ibu }}</option>
+                            <select name="IdOrangtua" class="custom-select rounded-0" id="formGroupExampleInput"
+                                required>
+                                <option value="">Pilih Nama Orang Tua</option>
+                                @foreach ($dataOrangtua as $dataIbu)
+                                    <option value="{{ $dataIbu->id }}">{{ $dataIbu->nama_ibu }}</option>
                                 @endforeach
                             </select>
-                            <span class="text-danger" id="IdOrangtua_error"></span>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success" onclick="validateForm()">Create</button>
+                            <button type="submit" class="btn btn-success">Create</button>
                         </div>
                     </form>
                 </div>
@@ -140,7 +146,7 @@
     </div>
 
     {{-- Ubah Data --}}
-    @foreach ($dataanak as $item)
+    @foreach ($dataAnak as $item)
         <div class="modal fade" id="modal-edit-{{ $item->id }}" data-backdrop="static">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -156,21 +162,19 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group mb-3">
-                                <label for="nik_anak" class="form-label">NIK</label>
+                                <label for="nik_anak" class="form-label">NIK Anak</label>
                                 <input type="text" name="nik_anak" class="form-control"
-                                    value="{{ $item->nik_anak }}">
-                                <span class="text-danger" id="nik_anak_error_{{ $item->id }}"></span>
+                                    value="{{ $item->nik_anak }}" required>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="nama_anak" class="form-label">Nama</label>
+                                <label for="nama_anak" class="form-label">Nama Anak</label>
                                 <input type="text" name="nama_anak" class="form-control"
-                                    value="{{ $item->nama_anak }}">
-                                <span class="text-danger" id="nama_anak_error_{{ $item->id }}"></span>
+                                    value="{{ $item->nama_anak }}" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="umur" class="form-label">Umur</label>
-                                <input type="text" name="umur" class="form-control" value="{{ $item->umur }}">
-                                <span class="text-danger" id="umur_error_{{ $item->id }}"></span>
+                                <input type="text" name="umur" class="form-control" value="{{ $item->umur }}"
+                                    required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="berat_badan" class="form-label">Berat Badan</label>
@@ -183,26 +187,22 @@
                                     value="{{ $item->tinggi_badan }}">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="bmi" class="form-label">Hasil BMI</label>
+                                <label for="lingkar_kepala" class="form-label">Lingkar Kepala</label>
+                                <input type="text" name="lingkar_kepala" class="form-control"
+                                    value="{{ $item->lingkar_kepala }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="lingkar_lengan" class="form-label">Lingkar Lengan</label>
+                                <input type="text" name="lingkar_lengan" class="form-control"
+                                    value="{{ $item->lingkar_lengan }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="bmi" class="form-label">BMI</label>
                                 <input type="text" name="bmi" class="form-control" value="{{ $item->bmi }}">
                             </div>
-                            <div class="mb-3">
-                                <label for="IdOrangtua" class="form-label">Nama Ibu</label>
-                                <select name="IdOrangtua" class="custom-select rounded-0" id="IdOrangtua">
-                                    <option value="">Pilih Orang tua</option>
-                                    @foreach ($dataorangtuas as $dataorangtua)
-                                        <option value="{{ $dataorangtua->id }}"
-                                            @if ($dataorangtua->id == $item->IdOrangtua) selected @endif>
-                                            {{ $dataorangtua->nama_ibu }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="text-danger" id="IdOrangtua_error_{{ $item->id }}"></span>
-                            </div>                            
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success"
-                                    onclick="validateUpdateForm('{{ $item->id }}')">Update</button>
+                                <button type="submit" class="btn btn-success">Update</button>
                             </div>
                         </form>
                     </div>
@@ -212,71 +212,13 @@
     @endforeach
 
     <script>
-        // Tambah Data
-        function validateForm() {
-            var nikAnak = document.forms["quickForm"]["nik_anak"].value;
-            var namaAnak = document.forms["quickForm"]["nama_anak"].value;
-            var umur = document.forms["quickForm"]["umur"].value;
-            var IdOrangtua = document.forms["quickForm"]["IdOrangtua"].value;
-
-            document.getElementById('nik_anak_error').innerHTML = "";
-            document.getElementById('nama_anak_error').innerHTML = "";
-            document.getElementById('umur_error').innerHTML = "";
-            document.getElementById('IdOrangtua_error').innerHTML = "";
-
-            if (nikAnak == "") {
-                document.getElementById('nik_anak_error').innerHTML = "NIK Anak harus diisi";
-            }
-            if (namaAnak == "") {
-                document.getElementById('nama_anak_error').innerHTML = "Nama Anak harus diisi";
-            }
-            if (umur == "") {
-                document.getElementById('umur_error').innerHTML = "Umur harus diisi";
-            }
-            if (IdOrangtua == "") {
-                document.getElementById('IdOrangtua_error').innerHTML = "Nama Ibu harus diisi";
-            }
-
-            if (nikAnak != "" && namaAnak != "" && umur != "" && IdOrangtua != "") {
-                $('#quickForm').submit();
-            }
-        }
-
-        // Ubah Data
-        function validateUpdateForm(itemId) {
-            var nikAnak = document.forms["updateForm-" + itemId]["nik_anak"].value;
-            var namaAnak = document.forms["updateForm-" + itemId]["nama_anak"].value;
-            var umur = document.forms["updateForm-" + itemId]["umur"].value;
-
-            document.getElementById('nik_anak_error_' + itemId).innerHTML = "";
-            document.getElementById('nama_anak_error_' + itemId).innerHTML = "";
-            document.getElementById('umur_error_' + itemId).innerHTML = "";
-
-            if (nikAnak == "") {
-                document.getElementById('nik_anak_error_' + itemId).innerHTML = "NIK Anak harus diisi";
-            }
-            if (namaAnak == "") {
-                document.getElementById('nama_anak_error_' + itemId).innerHTML = "Nama Anak harus diisi";
-            }
-            if (umur == "") {
-                document.getElementById('umur_error_' + itemId).innerHTML = "Umur harus diisi";
-            }
-            if (IdOrangtua == "") {
-                document.getElementById('IdOrangtua_error' + itemId).innerHTML = "Nama Ibu harus diisi";
-            }
-
-            if (nikAnak != "" && namaAnak != "" && alamat != "" && IdOrangtua != "") {
-                $('#updateForm-' + itemId).submit();
-            }
-        }
-
         // Hapus Data
         document.addEventListener('DOMContentLoaded', function() {
             $('.delete-btn').on('click', function() {
                 var itemId = $(this).data('id');
 
                 Swal.fire({
-                    title: 'Apakah anda yakin ingin menghapus data?',
+                    title: 'Apakah anda yakin ingin menghapus data anak?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

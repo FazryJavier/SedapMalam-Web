@@ -13,10 +13,10 @@ class DataAnakController extends Controller
      */
     public function index()
     {
-        $dataanak = DataAnak::orderBy('created_at', 'asc')->get();
-        $dataorangtuas = DataOrangtua::all();
+        $dataAnak = DataAnak::orderBy('created_at', 'asc')->get();
+        $dataOrangtua = DataOrangtua::all();
 
-        return view('Admin.Pages.DataAnak.index', compact('dataanak', 'dataorangtuas'));
+        return view('Admin.Pages.DataAnak.index', compact('dataAnak', 'dataOrangtua'));
     }
 
     /**
@@ -38,6 +38,8 @@ class DataAnakController extends Controller
             'umur' => 'required',
             'berat_badan' => 'nullable',
             'tinggi_badan' => 'nullable',
+            'lingkar_kepala' => 'nullable',
+            'lingkar_lengan' => 'nullable',
             'bmi' => 'nullable',
             'IdOrangtua' => 'required',
         ]);
@@ -60,11 +62,9 @@ class DataAnakController extends Controller
      */
     public function edit($id)
     {
-        $dataanak = DataAnak::find($id);
+        $dataAnak = DataAnak::findOrFail($id);
 
-        $dataorangtuas = DataOrangtua::all();
-
-        return view('Admin.Pages.DataAnak.edit', compact('dataanak', 'dataorangtuas'));
+        return view('Admin.Pages.DataOrangtua.edit', compact('dataAnak'));
     }
 
     /**
@@ -78,12 +78,14 @@ class DataAnakController extends Controller
             'umur' => 'required',
             'berat_badan' => 'nullable',
             'tinggi_badan' => 'nullable',
+            'lingkar_kepala' => 'nullable',
+            'lingkar_lengan' => 'nullable',
             'bmi' => 'nullable',
             'IdOrangtua' => 'required',
         ]);
 
-        $dataanak = DataAnak::findOrFail($id);
-        $dataanak->update($validatedData);
+        $dataAnak = DataAnak::findOrFail($id);
+        $dataAnak->update($validatedData);
 
         return redirect('/data-anak')->with('success', 'Data Anak berhasil diubah!');
     }
@@ -93,8 +95,8 @@ class DataAnakController extends Controller
      */
     public function destroy($id)
     {
-        $dataanak = DataAnak::findOrFail($id);
-        $dataanak->delete();
+        $dataAnak = DataAnak::findOrFail($id);
+        $dataAnak->delete();
 
         return redirect('/data-anak')->with('success', 'Data Anak berhasil dihapus!');
     }
